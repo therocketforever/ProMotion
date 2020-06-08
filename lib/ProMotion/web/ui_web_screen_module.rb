@@ -1,7 +1,7 @@
 module ProMotion
   module UIWebScreenModule
     def web_view_setup
-      self.webview = add UIWebView.new, {
+      self.webview = add WKWebView.new, {
         frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height),
         delegate: self,
         data_detector_types: data_detector_types
@@ -47,7 +47,7 @@ module ProMotion
 
     def webView(in_web, shouldStartLoadWithRequest:in_request, navigationType:in_type)
       if %w(http https).include?(in_request.URL.scheme)
-        if self.external_links == true && in_type == UIWebViewNavigationTypeLinkClicked
+        if self.external_links == true && in_type == WKWebViewNavigationTypeLinkClicked
           if defined?(OpenInChromeController)
             open_in_chrome in_request
           else
